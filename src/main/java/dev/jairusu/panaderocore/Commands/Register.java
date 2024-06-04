@@ -2,6 +2,7 @@ package dev.jairusu.panaderocore.Commands;
 
 import dev.jairusu.panaderocore.Configuration.MessageFile;
 import dev.jairusu.panaderocore.Configuration.PasswordFile;
+import dev.jairusu.panaderocore.Methods.MessageClass;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -63,7 +64,8 @@ public class Register implements CommandExecutor, TabCompleter {
       PasswordFile.savePasswordFile(player, "data.uuid", player.getUniqueId().toString());
       PasswordFile.savePasswordFile(player, "data.password", input);
       PasswordFile.savePasswordFile(player, "data.status", "cracked");
-      player.kick(MessageFile.miniMessage("You are now Logged in! Please rejoin the game to continue."));
+      player.kick(MessageClass.registeredMessage(player));
+
       return true;
    }
 }

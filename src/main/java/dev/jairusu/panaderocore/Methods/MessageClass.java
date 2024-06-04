@@ -6,8 +6,29 @@ import org.bukkit.entity.Player;
 
 public class MessageClass {
 
-   public static Component loginMessage(Player player) {
+   public static void sendLoginMessage(Player player) {
       String message = MessageFile.getFileConfig().getString("message.loginMessage");
+      if (message == null) return;
+      message = message.replace("%player%",player.getName());
+      player.sendMessage(MessageFile.miniMessage(message));
+   }
+
+   public static void sendRegisterMessage(Player player) {
+      String message = MessageFile.getFileConfig().getString("message.registerMessage");
+      if (message == null) return;
+      message = message.replace("%player%",player.getName());
+      player.sendMessage(MessageFile.miniMessage(message));
+   }
+
+   public static void sendLoggedInMessage(Player player) {
+      String message = MessageFile.getFileConfig().getString("message.loggedInMessage");
+      if (message == null) return;
+      message = message.replace("%player%",player.getName());
+      player.sendMessage(MessageFile.miniMessage(message));
+   }
+
+   public static Component registeredMessage(Player player) {
+      String message = MessageFile.getFileConfig().getString("message.registeredMessage");
       if (message == null) return null;
       message = message.replace("%player%",player.getName());
       return MessageFile.miniMessage(message);

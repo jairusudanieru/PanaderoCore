@@ -2,8 +2,8 @@ package dev.jairusu.panaderocore.Events;
 
 import com.github.games647.fastlogin.core.PremiumStatus;
 import dev.jairusu.panaderocore.Configuration.ConfigFile;
-import dev.jairusu.panaderocore.Configuration.MessageFile;
 import dev.jairusu.panaderocore.Configuration.PasswordFile;
+import dev.jairusu.panaderocore.Methods.MessageClass;
 import dev.jairusu.panaderocore.Panadero_Core;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -42,18 +42,19 @@ public class PlayerAuth implements Listener {
 
    private void authenticatePlayer(Player player) {
       this.teleportOnSpawn(player);
-      this.sendAuthentication(player);
       if (Panadero_Core.fastLoginBukkit.getStatus(player.getUniqueId()).equals(PremiumStatus.PREMIUM)) {
-         this.autoRegisterPlayer(player);
-         return;
-      }
+         if (!PasswordFile.getPlayerFile(player).exists() || PasswordFile.getPlayerFileConfig(player).get("data.username") == null) {
+            this.autoRegisterPlayer(player);
+         }
+      } else {
+         this.sendAuthentication(player);
+         if (!PasswordFile.getPlayerFile(player).exists() || PasswordFile.getPlayerFileConfig(player).get("data.password") == null) {
+            MessageClass.sendRegisterMessage(player);
+            return;
+         }
 
-      if (!PasswordFile.getPlayerFile(player).exists() || PasswordFile.getPlayerFileConfig(player).get("data.password") == null) {
-         player.sendMessage(MessageFile.miniMessage("<gray>/register (password) (confirmPassword)"));
-         return;
+         MessageClass.sendLoginMessage(player);
       }
-
-      player.sendMessage(MessageFile.miniMessage("<gray>/login (password)"));
    }
 
    private void teleportOnSpawn(Player player) {

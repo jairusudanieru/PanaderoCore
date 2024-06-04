@@ -8,15 +8,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Panadero_Core extends JavaPlugin {
 
-    public static FastLoginBukkit fastLoginBukkit = JavaPlugin.getPlugin(FastLoginBukkit.class);
+    public static final FastLoginBukkit fastLoginBukkit = JavaPlugin.getPlugin(FastLoginBukkit.class);
 
     @Override
     public void onEnable() {
+        fastLoginBukkit.getCore().setAuthPluginHook(new AuthPluginHook());
         this.saveDefaultConfig();
         StartupClass.registerCommands();
         StartupClass.registerEvents();
         MessageFile.checkConfigFile();
-        fastLoginBukkit.getCore().setAuthPluginHook(new AuthPluginHook());
         this.getLogger().info("Panadero-Core Plugin has been enabled!");
     }
 
