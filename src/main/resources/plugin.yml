@@ -1,0 +1,26 @@
+name: Panadero-Core
+version: '${project.version}'
+main: dev.jairusu.panaderocore.Panadero_Core
+api-version: '1.20'
+
+commands:
+  login:
+    usage: /login <password>
+    aliases:
+      - log
+  register:
+    usage: /register <password> <confirmPassword>
+    aliases:
+      - reg
+  changepassword:
+    usage: /changepassword <oldPassword> <newPassword>
+    aliases:
+      - changepass
+  setspawn:
+    usage: /setspawn
+    permission: op
+  spawn:
+    usage: /spawn
+  authreload:
+    usage: /authreload
+    permission: op
