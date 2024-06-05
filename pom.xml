@@ -71,17 +71,19 @@
             <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+        <!--For Authentication-->
         <dependency>
             <groupId>com.github.games647</groupId>
             <artifactId>fastlogin.bukkit</artifactId>
             <version>1.12-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.mojang</groupId>
-            <artifactId>authlib</artifactId>
-            <version>1.5.21</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+        <!--For Custom Skulls-->
+      <dependency>
+          <groupId>com.mojang</groupId>
+          <artifactId>authlib</artifactId>
+          <version>1.5.21</version>
+          <scope>provided</scope>
+      </dependency>
+  </dependencies>
 </project>
