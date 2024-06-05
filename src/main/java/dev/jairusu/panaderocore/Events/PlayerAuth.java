@@ -46,7 +46,7 @@ public class PlayerAuth implements Listener {
          if (!PasswordFile.getPlayerFile(player).exists() || PasswordFile.getPlayerFileConfig(player).get("data.username") == null) {
             this.autoRegisterPlayer(player);
          }
-         LocationClass.teleportTo(player, LocationClass.spawnLocation());
+         LobbyClass.loginPlayer(player);
          LobbyClass.giveHotbarItems(player);
       } else {
          LocationClass.loginAuthLocation(player);

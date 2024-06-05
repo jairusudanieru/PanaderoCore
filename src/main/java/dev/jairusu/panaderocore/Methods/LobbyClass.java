@@ -126,9 +126,9 @@ public class LobbyClass {
 
    public static void giveHotbarItems(Player player) {
       player.getInventory().clear();
-      player.getInventory().setItem(8, LIME_DYE());
       player.getInventory().setItem(4, COMPASS());
       player.getInventory().setItem(0, INFO_BOOK());
+      player.getInventory().setItem(8, LIME_DYE());
    }
 
    public static void showOthers(Player player) {
@@ -145,6 +145,16 @@ public class LobbyClass {
       for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
          if (!worldGroup.contains(onlinePlayer.getWorld().getName())) continue;
          player.hidePlayer(ConfigFile.getPlugin, onlinePlayer);
+      }
+   }
+
+   public static void loginPlayer(Player player) {
+      player.teleport(LocationClass.spawnLocation());
+      for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+         if (!onlinePlayer.getWorld().equals(player.getWorld())) continue;
+         player.showPlayer(ConfigFile.getPlugin, onlinePlayer);
+         if (onlinePlayer.getInventory().contains(LobbyClass.GRAY_DYE())) continue;
+         onlinePlayer.showPlayer(ConfigFile.getPlugin, player);
       }
    }
 

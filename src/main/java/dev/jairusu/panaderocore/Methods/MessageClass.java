@@ -27,6 +27,20 @@ public class MessageClass {
       player.sendMessage(MessageFile.miniMessage(message));
    }
 
+   public static void sendJoinMessage(Player player, Player target) {
+      String message = MessageFile.getFileConfig().getString("message.joinMessage");
+      if (message == null) return;
+      message = message.replace("%player%",player.getName());
+      target.sendMessage(MessageFile.miniMessage(message));
+   }
+
+   public static void sendQuitMessage(Player player, Player target) {
+      String message = MessageFile.getFileConfig().getString("message.quitMessage");
+      if (message == null) return;
+      message = message.replace("%player%",player.getName());
+      target.sendMessage(MessageFile.miniMessage(message));
+   }
+
    public static Component registeredMessage(Player player) {
       String message = MessageFile.getFileConfig().getString("message.registeredMessage");
       if (message == null) return null;

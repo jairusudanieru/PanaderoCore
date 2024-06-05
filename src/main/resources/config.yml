@@ -1,5 +1,7 @@
 config:
   teleportOnSpawn: false
+  launchpadPower: 2.0
+  launchpadHeight: 0.5
 
 location:
   authLocation: location
@@ -8,3 +10,27 @@ location:
   survivalLocation: location
   pvpArenaLocation: location
   tagArenaLocation: location
+
+arenaHub:
+  pos1: location
+  pos2: location
+
+advancements:
+  allowed:
+    - world
+    - world_nether
+    - world_the_end
+
+worldGroups:
+  group1:
+    - world
+    - world_nether
+    - world_the_end
+  group2:
+    - world_lobby
+  group3:
+    - world_creative
+  group4:
+    - world_pvp_arena
+  group5:
+    - world_tag_arena

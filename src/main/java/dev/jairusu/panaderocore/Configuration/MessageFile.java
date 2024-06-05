@@ -36,5 +36,8 @@ public class MessageFile {
       fileConfiguration = YamlConfiguration.loadConfiguration(file);
    }
 
+   public static String getString(String key) {
+      return getFileConfig().getString(key);
+   }
 
 }

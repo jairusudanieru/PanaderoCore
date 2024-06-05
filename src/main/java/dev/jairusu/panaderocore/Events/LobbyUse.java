@@ -4,8 +4,9 @@ import dev.jairusu.panaderocore.Configuration.ConfigFile;
 import dev.jairusu.panaderocore.Configuration.MessageFile;
 import dev.jairusu.panaderocore.Methods.LobbyClass;
 import dev.jairusu.panaderocore.Methods.LocationClass;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
+import dev.jairusu.panaderocore.Methods.WorldGroups;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -147,5 +148,29 @@ public class LobbyUse implements Listener {
       if (player.getGameMode().equals(GameMode.CREATIVE)) return;
       event.setCancelled(true);
    }
+
+   @EventHandler
+   public void onLaunchPads(PlayerInteractEvent event) {
+      Player player = event.getPlayer();
+      if (!player.getWorld().equals(LocationClass.spawnLocation().getWorld())) return;
+
+      if (event.getAction() != Action.PHYSICAL) return;
+      Block block = event.getClickedBlock();
+      if (block == null) return;
+      Material material = block.getType();
+      Location blockUnder = player.getLocation();
+      blockUnder.setY(blockUnder.getY() - 1);
+
+      double power = ConfigFile.getDouble("config.launchpadPower");
+      double height = ConfigFile.getDouble("config.launchpadHeight");
+
+      if (!material.name().contains("PRESSURE_PLATE")) return;
+      event.setCancelled(true);
+
+      if (!blockUnder.getBlock().getType().equals(Material.GOLD_BLOCK)) return;
+      player.playSound(player.getLocation(), Sound.ENTITY_BAT_TAKEOFF, 1, 1);
+      player.setVelocity(player.getLocation().getDirection().multiply(power).setY(height));
+   }
+
 
 }

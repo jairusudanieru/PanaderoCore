@@ -2,6 +2,7 @@ package dev.jairusu.panaderocore;
 
 import com.github.games647.fastlogin.bukkit.FastLoginBukkit;
 import dev.jairusu.panaderocore.Configuration.MessageFile;
+import dev.jairusu.panaderocore.Methods.AFKClass;
 import dev.jairusu.panaderocore.Methods.AuthPluginHook;
 import dev.jairusu.panaderocore.Methods.LobbyClass;
 import dev.jairusu.panaderocore.Methods.StartupClass;
@@ -16,6 +17,7 @@ public final class Panadero_Core extends JavaPlugin {
         fastLoginBukkit.getCore().setAuthPluginHook(new AuthPluginHook());
         this.saveDefaultConfig();
         LobbyClass.makeInventory();
+        AFKClass.checkPlayerStatus();
         StartupClass.registerCommands();
         StartupClass.registerEvents();
         MessageFile.checkConfigFile();
@@ -24,6 +26,7 @@ public final class Panadero_Core extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        AFKClass.clearAFKTeamEntries();
         this.getLogger().info("Panadero-Core Plugin has been disabled!");
     }
 
