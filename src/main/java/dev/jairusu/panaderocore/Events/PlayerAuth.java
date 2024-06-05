@@ -3,11 +3,12 @@ package dev.jairusu.panaderocore.Events;
 import com.github.games647.fastlogin.core.PremiumStatus;
 import dev.jairusu.panaderocore.Configuration.ConfigFile;
 import dev.jairusu.panaderocore.Configuration.PasswordFile;
+import dev.jairusu.panaderocore.Methods.LobbyClass;
 import dev.jairusu.panaderocore.Methods.MessageClass;
+import dev.jairusu.panaderocore.Methods.LocationClass;
 import dev.jairusu.panaderocore.Panadero_Core;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -41,12 +42,14 @@ public class PlayerAuth implements Listener {
    }
 
    private void authenticatePlayer(Player player) {
-      this.teleportOnSpawn(player);
       if (Panadero_Core.fastLoginBukkit.getStatus(player.getUniqueId()).equals(PremiumStatus.PREMIUM)) {
          if (!PasswordFile.getPlayerFile(player).exists() || PasswordFile.getPlayerFileConfig(player).get("data.username") == null) {
             this.autoRegisterPlayer(player);
          }
+         LocationClass.teleportTo(player, LocationClass.spawnLocation());
+         LobbyClass.giveHotbarItems(player);
       } else {
+         LocationClass.loginAuthLocation(player);
          this.sendAuthentication(player);
          if (!PasswordFile.getPlayerFile(player).exists() || PasswordFile.getPlayerFileConfig(player).get("data.password") == null) {
             MessageClass.sendRegisterMessage(player);
@@ -54,13 +57,6 @@ public class PlayerAuth implements Listener {
          }
 
          MessageClass.sendLoginMessage(player);
-      }
-   }
-
-   private void teleportOnSpawn(Player player) {
-      Location spawnLocation = ConfigFile.getLocation("location.spawnLocation");
-      if (ConfigFile.getBoolean("config.teleportOnSpawn") && spawnLocation != null) {
-         player.teleport(spawnLocation);
       }
    }
 

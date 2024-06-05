@@ -2,6 +2,7 @@ package dev.jairusu.panaderocore.Methods;
 
 import dev.jairusu.panaderocore.Commands.*;
 import dev.jairusu.panaderocore.Configuration.ConfigFile;
+import dev.jairusu.panaderocore.Events.LobbyUse;
 import dev.jairusu.panaderocore.Events.PlayerAuth;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
@@ -17,11 +18,12 @@ public class StartupClass {
       registerCommand("login", new Login(), new Login());
       registerCommand("register", new Register(), new Register());
       registerCommand("authreload", new Reload(), new Reload());
-      registerCommand("setspawn", new SetSpawn(), new SetSpawn());
+      registerCommand("setlocation", new SetLocation(), new SetLocation());
       registerCommand("spawn", new Spawn(), new Spawn());
    }
 
    public static void registerEvents() {
+      Bukkit.getPluginManager().registerEvents(new LobbyUse(), ConfigFile.getPlugin);
       Bukkit.getPluginManager().registerEvents(new PlayerAuth(), ConfigFile.getPlugin);
    }
 

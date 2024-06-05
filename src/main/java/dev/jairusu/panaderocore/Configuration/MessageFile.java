@@ -1,6 +1,7 @@
 package dev.jairusu.panaderocore.Configuration;
 
 import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.format.TextDecoration;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -14,7 +15,7 @@ public class MessageFile {
 
    public static Component miniMessage(String text) {
       MiniMessage miniMessage = MiniMessage.miniMessage();
-      return miniMessage.deserialize(text);
+      return miniMessage.deserialize(text).decoration(TextDecoration.ITALIC,false);
    }
 
    public static void checkConfigFile() {

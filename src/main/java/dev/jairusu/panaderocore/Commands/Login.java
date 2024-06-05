@@ -3,7 +3,9 @@ package dev.jairusu.panaderocore.Commands;
 import dev.jairusu.panaderocore.Configuration.ConfigFile;
 import dev.jairusu.panaderocore.Configuration.MessageFile;
 import dev.jairusu.panaderocore.Configuration.PasswordFile;
+import dev.jairusu.panaderocore.Methods.LobbyClass;
 import dev.jairusu.panaderocore.Methods.MessageClass;
+import dev.jairusu.panaderocore.Methods.LocationClass;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -59,6 +61,8 @@ public class Login implements CommandExecutor, TabCompleter {
       if (player.getGameMode().equals(GameMode.SPECTATOR)) player.setGameMode(GameMode.ADVENTURE);
       player.removeMetadata("unlogged", ConfigFile.getPlugin);
       MessageClass.sendLoggedInMessage(player);
+      LocationClass.teleportTo(player, LocationClass.spawnLocation());
+      LobbyClass.giveHotbarItems(player);
       return true;
    }
 

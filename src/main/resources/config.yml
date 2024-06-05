@@ -2,4 +2,9 @@ config:
   teleportOnSpawn: false
 
 location:
+  authLocation: location
   spawnLocation: location
+  creativeLocation: location
+  survivalLocation: location
+  pvpArenaLocation: location
+  tagArenaLocation: location

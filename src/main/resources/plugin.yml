@@ -18,8 +18,8 @@ commands:
     usage: /changepassword <oldPassword> <newPassword>
     aliases:
       - changepass
-  setspawn:
-    usage: /setspawn
+  setlocation:
+    usage: /setlocation <location>
     permission: op
   spawn:
     usage: /spawn

@@ -16,7 +16,7 @@ public class PasswordFile {
       File file = getPlayerFile(player);
       if (!file.exists()) {
          boolean wasCreated = file.getParentFile().mkdirs();
-         if (!wasCreated) ConfigFile.getLogger.info("Password was not created!");
+         if (!wasCreated) ConfigFile.getLogger.info("Passwords Folder was not created!");
          try {
             boolean fileCreated = file.createNewFile();
             if (!fileCreated) throw new IOException("Unable to create file!");

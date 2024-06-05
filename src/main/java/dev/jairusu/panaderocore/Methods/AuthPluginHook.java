@@ -19,4 +19,9 @@ public class AuthPluginHook implements AuthPlugin<Player> {
    public boolean isRegistered(String s) {
       return false;
    }
+
+   public static boolean isAuthenticated(Player player) {
+      return !player.hasMetadata("unlogged");
+   }
+
 }
